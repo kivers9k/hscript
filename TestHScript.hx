@@ -233,6 +233,14 @@ class TestHScript extends TestCase {
 		assertScript('var newMap = [{a:"a"}=>"foo", objKey=>"bar"]; newMap[objKey];', 'bar', vars);
 	}
 
+	function testImport() {
+		var p = new hscript.Parser();
+		var i = new hscript.Interp();
+		i.execute(p.parseString('
+		    import haxe.format.JsonParser;
+		'));
+	}
+
 	static function main() {
 		#if ((haxe_ver < 4) && php)
 		// uncaught exception: The each() function is deprecated. This message will be suppressed on further calls (errno: 8192)
