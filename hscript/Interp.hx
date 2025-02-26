@@ -531,6 +531,14 @@ class Interp {
 		case ECheckType(e,_):
 			return expr(e);
 		}
+		case EImport(c, as):
+			var name = c.split('.').pop();
+			var classes = Type.resolveClass(c);
+
+			if (Type.resolveEnum(c) != null)
+                classes = Type.resolveEnum(c);
+ 		    
+			variables.set(className, classes);
 		return null;
 	}
 
