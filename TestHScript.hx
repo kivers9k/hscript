@@ -232,6 +232,16 @@ class TestHScript extends TestCase {
 		#end
 		assertScript('var newMap = [{a:"a"}=>"foo", objKey=>"bar"]; newMap[objKey];', 'bar', vars);
 	}
+ 
+ 	function testImport() {
+		var p = new Parser();
+		var i = new Interp();
+
+		i.execute(p.parseString('
+		    import StringTools;
+		'));
+	}
+
 
 	static function main() {
 		#if ((haxe_ver < 4) && php)

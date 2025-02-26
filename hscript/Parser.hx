@@ -763,8 +763,22 @@ class Parser {
 			}
 			mk(ESwitch(e, cases, def), p1, tokenMax);
 	    case 'import':
-			var string = getIdent(); 
-			mk(EImport(string), p1);
+			var path = [];
+			var tk = null;
+            
+			while ( true ) {
+				tk = token();
+			    switch( tk ) {
+                	case TId(id):
+				        path.push(id);
+			        default:
+				        unexpected(t);
+		    	}
+    		}
+			ensure(TSemicolon);
+			
+	        var name = path.join('.');
+			mk(EImport(name), p1);
 		default:
 			null;
 		}
