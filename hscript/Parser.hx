@@ -763,7 +763,7 @@ class Parser {
 			}
 			mk(ESwitch(e, cases, def), p1, tokenMax);
 	    case 'import':
-			var string = token(); 
+			var string = getIdent(); 
 			mk(EImport(string), p1);
 		default:
 			null;
