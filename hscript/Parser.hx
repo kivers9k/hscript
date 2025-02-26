@@ -772,7 +772,7 @@ class Parser {
                 	case TId(id):
 				        path.push(id);
 			        default:
-				        unexpected(t);
+				        unexpected(tk);
 		    	}
     		}
 			ensure(TSemicolon);
