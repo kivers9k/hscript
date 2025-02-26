@@ -764,19 +764,32 @@ class Parser {
 			mk(ESwitch(e, cases, def), p1, tokenMax);
 	    case 'import':
 			var path = [];
-			var tk = null;
-            
-			while ( true ) {
-				tk = token();
-			    switch( tk ) {
-                	case TId(id):
-				        path.push(id);
-			        default:
-				        unexpected(tk);
-		    	}
-    		}
-			ensure(TSemicolon);
+			var asname = null;
 			
+			var tk = token();
+		    switch( tk ) {
+             	case TId(id):
+			        while ( true ) {
+						tk = token();
+						switch( tk ) {
+							case TId( id ): path.push(id);
+							default: unexpected(tk);
+						}
+						
+						tk = token();
+						if ( tk != TDot && tk.match('as') ) {
+							tk = token();
+							switch ( tk ) {
+								case TId( id ): asname = id;
+								default: unexpected(tk);
+							}
+						}
+					}
+			    default:
+				    unexpected(tk);
+		  	}
+			ensure(TSemicolon);
+
 	        var name = path.join('.');
 			mk(EImport(name), p1);
 		default:
