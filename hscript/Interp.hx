@@ -541,12 +541,11 @@ class Interp {
 			if (Type.resolveEnum(c) != null)
                 resolves = Type.resolveEnum(c);
  		    
-			if (Type.resolveClass(c) == null && Type.resolveEnum(c) == null) {
+			if (resolves == null) {
 				error('uknown identifier: ' + splits[0].split('.').pop());
-			    return;
+		    } else {
+			    variables.set(name, resolves);
 		    }	
-
-			variables.set(name, resolves);
 	    }
 		return null;
 	}
