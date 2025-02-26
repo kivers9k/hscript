@@ -33,7 +33,7 @@ private enum Stop {
 class Interp {
 
 	public var variables : Map<String,Dynamic>;
-	var locals : Map<String,{ r : Dynamic }>;
+	public var locals : Map<String,{ r : Dynamic }>;
 	var binops : Map<String, Expr -> Expr -> Dynamic >;
 
 	var depth : Int;
