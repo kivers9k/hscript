@@ -31,8 +31,6 @@ class TestHScript extends TestCase {
 				interp.variables.set(v,Reflect.field(vars,v));
 		var ret : Dynamic = interp.execute(program);
 		assertEquals(v, ret, pos);
-
-		interp.execute('import Math');
 	}
 
 	function test():Void {
