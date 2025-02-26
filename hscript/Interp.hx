@@ -532,12 +532,12 @@ class Interp {
 			return expr(e);
 		case EImport(c, as):
 			var name = c.split('.').pop();
-			var classes = Type.resolveClass(c);
+			var classes:Dynamic = Type.resolveClass(c);
 
 			if (Type.resolveEnum(c) != null)
                 classes = Type.resolveEnum(c);
  		    
-			variables.set(className, classes);
+			variables.set(name, classes);
 	    }
 		return null;
 	}
