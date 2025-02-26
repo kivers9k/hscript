@@ -777,7 +777,7 @@ class Parser {
 						}
 						
 						tk = token();
-						if ( tk != TDot && tk.match('as') ) {
+						if ( tk != TDot && tk.match(TId('as')) ) {
 							tk = token();
 							switch ( tk ) {
 								case TId( id ): asname = id;
@@ -790,7 +790,7 @@ class Parser {
 		  	}
 			ensure(TSemicolon);
 
-	        var name = path.join('.');
+	        var name = path.join('.') + asname != null ? 'as ' + asname : '';
 			mk(EImport(name), p1);
 		default:
 			null;
