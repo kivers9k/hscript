@@ -542,7 +542,7 @@ class Interp {
                 resolves = Type.resolveEnum(c);
  		    
 			if (resolves == null) {
-				error('uknown identifier: ' + splits[0].split('.').pop());
+				error(ECustom('uknown identifier: ' + splits[0].split('.').pop()));
 		    } else {
 			    variables.set(name, resolves);
 		    }	
