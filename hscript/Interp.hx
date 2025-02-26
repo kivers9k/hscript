@@ -531,13 +531,22 @@ class Interp {
 		case ECheckType(e,_):
 			return expr(e);
 		case EImport(c):
-			var name = c.split('.').pop();
-			var classes:Dynamic = Type.resolveClass(c);
+			var splits = c.split(' ');
+			var name = splits[0].split('.').pop();
+			var resolves:Dynamic = Type.resolveClass(c);
+
+			if (splits[1] != null)
+				name = splits[2];
 
 			if (Type.resolveEnum(c) != null)
-                classes = Type.resolveEnum(c);
+                resolves = Type.resolveEnum(c);
  		    
-			variables.set(name, classes);
+			if (Type.resolveClass(c) == null && Type.resolveEnum(c) == null) {
+				error('uknown identifier: ' + splits[0].split('.').pop());
+			    return;
+		    }	
+
+			variables.set(name, resolves);
 	    }
 		return null;
 	}
