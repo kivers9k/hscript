@@ -530,7 +530,7 @@ class Interp {
 			return expr(e);
 		case ECheckType(e,_):
 			return expr(e);
-		case EImport(c, as):
+		case EImport(c):
 			var name = c.split('.').pop();
 			var classes:Dynamic = Type.resolveClass(c);
 

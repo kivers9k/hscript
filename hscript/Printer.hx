@@ -322,7 +322,7 @@ class Printer {
 			add(" : ");
 			addType(t);
 			add(")");
-		case EImport(c, as):
+		case EImport(c):
 		    add('import ' + c);
 		}
 	}

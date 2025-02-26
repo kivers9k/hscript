@@ -232,9 +232,8 @@ class Bytes {
 			doEncode(e);
 		case ECheckType(e,_):
 			doEncode(e);
-	    case EImport(c, as):
+	    case EImport(c):
 			doEncodeString(c);
-			doEncodeString(as);
 		}
 	}
 
