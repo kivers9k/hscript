@@ -541,7 +541,7 @@ class Interp {
 				if (as != null) name = as;
 			    variables.set(name, resolves);
 			} else {
-				error(ECustom('uknown identifier: ' + name));
+				error(ECustom('unknown identifier: ' + name));
 		    }	
 	    }
 		return null;

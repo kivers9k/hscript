@@ -765,6 +765,7 @@ class Parser {
 	    case 'import':
 			var path = [getIdent()];
             var asName = null;
+
 			while(true) {
                 var tk = token();
 				if (tk != TDot) {
@@ -776,14 +777,16 @@ class Parser {
 				switch(tk) {
                     case TId(id):
 					    path.push(id);
-						if (tk.match(TId('as')))
-						    asName = getIdent();
 				    default:
 					    unexpected(tk);
 				}
 			}
 
+			if (maybe(TId('as')))
+			    asName = getIdent();
+
 			var paths = path.join('.');
+			
 			mk(EImport(paths, asName), p1);
 		default:
 			null;
