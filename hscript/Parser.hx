@@ -776,15 +776,15 @@ class Parser {
 				switch(tk) {
                     case TId(id):
 					    path.push(id);
-				    case TOp('as'):
-					    asName = getIdent();
+						if (tk.match(TId('as')))
+						    asName = getIdent();
 				    default:
 					    unexpected(tk);
 				}
 			}
 
-			var joinPath = path.join('.');
-			mk(EImport(joinPath, asName), p1);
+			var paths = path.join('.');
+			mk(EImport(paths, asName), p1);
 		default:
 			null;
 		}

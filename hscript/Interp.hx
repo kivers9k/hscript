@@ -537,11 +537,11 @@ class Interp {
 			if (Type.resolveEnum(c) != null)
                 resolves = Type.resolveEnum(c);
  		    
-			if (resolves == null) {
-				error(ECustom('uknown identifier: ' + name));
-		    } else {
+			if (resolves != null) {
 				if (as != null) name = as;
 			    variables.set(name, resolves);
+			} else {
+				error(ECustom('uknown identifier: ' + name));
 		    }	
 	    }
 		return null;
