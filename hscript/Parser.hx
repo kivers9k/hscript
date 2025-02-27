@@ -763,8 +763,28 @@ class Parser {
 			}
 			mk(ESwitch(e, cases, def), p1, tokenMax);
 	    case 'import':
-			var path = parsePath();
-			mk(EImport(path.join('.')), p1);
+			var path = [getIdent()];
+            var asName = null;
+			while(true) {
+                var tk = token();
+				if (tk != TDot) {
+					push(tk);
+				    break;
+				}
+				
+				tk = token
+				switch(tk) {
+                    case TId(id):
+					    path.push(id);
+				    case TOp('as'):
+					    asName = getIdent();
+				    default:
+					    unexpected(tk);
+				}
+			}
+
+			var joinPath = path.join('.');
+			mk(EImport(joinPath, asName), p1);
 		default:
 			null;
 		}
