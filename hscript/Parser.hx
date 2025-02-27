@@ -771,8 +771,8 @@ class Parser {
 					push(tk);
 				    break;
 				}
-				
-				tk = token
+
+				tk = token;
 				switch(tk) {
                     case TId(id):
 					    path.push(id);
