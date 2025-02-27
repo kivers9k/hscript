@@ -530,20 +530,17 @@ class Interp {
 			return expr(e);
 		case ECheckType(e,_):
 			return expr(e);
-		case EImport(c):
-			var splits = c.split(' ');
-			var name = splits[0].split('.').pop();
+		case EImport(c, as):
+			var name = c.split('.').pop();
 			var resolves:Dynamic = Type.resolveClass(c);
-
-			if (splits[1] != null)
-				name = splits[2];
 
 			if (Type.resolveEnum(c) != null)
                 resolves = Type.resolveEnum(c);
  		    
 			if (resolves == null) {
-				error(ECustom('uknown identifier: ' + splits[0].split('.').pop()));
+				error(ECustom('uknown identifier: ' + name));
 		    } else {
+				if (as != null) name = as;
 			    variables.set(name, resolves);
 		    }	
 	    }

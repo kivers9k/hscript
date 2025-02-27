@@ -322,8 +322,9 @@ class Printer {
 			add(" : ");
 			addType(t);
 			add(")");
-		case EImport(c):
+		case EImport(c, as):
 		    add('import ' + c);
+			add('as ' + as);
 		}
 	}
 
