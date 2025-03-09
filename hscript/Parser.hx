@@ -860,7 +860,7 @@ class Parser {
 		if( tk != TPClose ) {
 			var done = false;
 			while( !done ) {
-				var name = null, value = null, opt = false;
+				var name = null, opt = false;
 				switch( tk ) {
 				case TQuestion:
 					opt = true;
@@ -870,24 +870,21 @@ class Parser {
 				switch( tk ) {
 				case TId(id): 
                     name = id;
-					tk = token();
-                    switch(tk) {
-					    case TOp("="):
-					        value = parseExpr();
-					}
 				default:
 					unexpected(tk);
 					break;
 				}
-   				var arg : Argument = { name : name , value : value };
-				args.push(arg);
-				if( opt ) arg.opt = true;
+   				var arg : Argument = { name : name };
+				if( opt )
+			 	   arg.opt = true;
 				if( allowTypes ) {
 					if( maybe(TDoubleDot) )
 						arg.t = parseType();
 					if( maybe(TOp("=")) )
 						arg.value = parseExpr();
 				}
+				args.push(arg);
+
 				tk = token();
 				switch( tk ) {
 				case TComma:
@@ -1349,6 +1346,7 @@ class Parser {
 						}
 					}
 					b.addChar(k);
+		 		case "$".code: b.addChar(parseExpr());
 				default: invalidChar(c);
 				}
 			} else if( c == 92 )
