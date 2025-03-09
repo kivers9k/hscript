@@ -874,7 +874,6 @@ class Parser {
 					break;
 				}
    				var arg : Argument = { name : name };
-				args.push(arg);
 				if( opt )
 			 	   arg.opt = true;
 				if( allowTypes ) {
@@ -883,6 +882,7 @@ class Parser {
 					if( maybe(TOp("=")) )
 						arg.value = parseExpr();
 				}
+				args.push(arg);
 				tk = token();
 				switch( tk ) {
 				case TComma:
