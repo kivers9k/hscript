@@ -868,13 +868,13 @@ class Parser {
 				default:
 				}
 				switch( tk ) {
-				case TId(id): 
-                    name = id;
+				case TId(id): name = id;
 				default:
 					unexpected(tk);
 					break;
 				}
    				var arg : Argument = { name : name };
+				args.push(arg);
 				if( opt )
 			 	   arg.opt = true;
 				if( allowTypes ) {
@@ -883,8 +883,6 @@ class Parser {
 					if( maybe(TOp("=")) )
 						arg.value = parseExpr();
 				}
-				args.push(arg);
-
 				tk = token();
 				switch( tk ) {
 				case TComma:
