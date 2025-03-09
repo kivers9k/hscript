@@ -1346,7 +1346,11 @@ class Parser {
 						}
 					}
 					b.addChar(k);
-		 		case "$".code: b.addChar(parseExpr());
+		 		case "$".code:
+                    var tk = token();
+					push(tk);
+                    var e = if( tk == TSemicolon ) null else parseExpr();
+				    b.addChar(e);
 				default: invalidChar(c);
 				}
 			} else if( c == 92 )
