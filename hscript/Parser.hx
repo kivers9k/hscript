@@ -1343,7 +1343,7 @@ class Parser {
 						}
 					}
 					b.addChar(k);
-				case "$".code: b.addChar('$parseFullExper');
+				case "$".code: b.addChar('${parseFullExper()}');
 				default: invalidChar(c);
 				}
 			} else if( c == 92 )
