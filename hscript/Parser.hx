@@ -874,15 +874,14 @@ class Parser {
 					break;
 				}
    				var arg : Argument = { name : name };
-				if( opt )
-			 	   arg.opt = true;
+				args.push(arg);
+				if( opt ) arg.opt = true;
 				if( allowTypes ) {
 					if( maybe(TDoubleDot) )
 						arg.t = parseType();
 					if( maybe(TOp("=")) )
 						arg.value = parseExpr();
 				}
-				args.push(arg);
 				tk = token();
 				switch( tk ) {
 				case TComma:
