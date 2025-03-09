@@ -870,7 +870,7 @@ class Parser {
 				switch( tk ) {
 				case TId(id): 
                     name = id;
-                    switcht(token()) {
+                    switch(token()) {
 					case TOp("="):
 					    value = parseExpr();
 					}
