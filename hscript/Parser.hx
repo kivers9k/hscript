@@ -860,7 +860,7 @@ class Parser {
 		if( tk != TPClose ) {
 			var done = false;
 			while( !done ) {
-				var name = null, opt = false;
+				var name = null, value = null, opt = false;
 				switch( tk ) {
 				case TQuestion:
 					opt = true;
@@ -868,12 +868,17 @@ class Parser {
 				default:
 				}
 				switch( tk ) {
-				case TId(id): name = id;
+				case TId(id): 
+                    name = id;
+                    switcht(token()) {
+					case TOp("="):
+					    value = parseExpr();
+					}
 				default:
 					unexpected(tk);
 					break;
 				}
-				var arg : Argument = { name : name };
+   				var arg : Argument = { name : name , value : value };
 				args.push(arg);
 				if( opt ) arg.opt = true;
 				if( allowTypes ) {
