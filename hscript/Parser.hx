@@ -1347,7 +1347,7 @@ class Parser {
 					}
 					b.addChar(k);
 		 		case "$".code:
-		            b.addChar(Std.string(parseExpr()));
+		            b.addChar(Std.parseInt(parseExpr()));
 				default: invalidChar(c);
 				}
 			} else if( c == 92 )
