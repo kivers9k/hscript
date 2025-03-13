@@ -52,30 +52,20 @@ class Parser {
 	public var opPriority : Map<String,Int>;
 	public var opRightAssoc : Map<String,Bool>;
 
-	/**
-		allows to check for #if / #else in code
-	**/
-	public var preprocesorValues : Map<String,Dynamic> = new Map();
+	//allows to check for #if / #else in code
+	public var preprocesorValues:Map<String,Dynamic> = new Map();
 
-	/**
-		activate JSON compatiblity
-	**/
-	public var allowJSON : Bool;
+	//activate JSON compatiblity
+	public var allowJSON:Bool = true;
 
-	/**
-		allow types declarations
-	**/
-	public var allowTypes : Bool;
+	//allow types declarations
+	public var allowTypes:Bool = true;
 
-	/**
-		allow haxe metadata declarations
-	**/
-	public var allowMetadata : Bool;
+	//allow haxe metadata declarations
+	public var allowMetadata:Bool = true;
 
-	/**
-		resume from parsing errors (when parsing incomplete code, during completion for example)
-	**/
-	public var resumeErrors : Bool;
+	//resume from parsing errors (when parsing incomplete code, during completion for example)
+	public var resumeErrors:Bool = true;
 
 	// implementation
 	var input : String;
