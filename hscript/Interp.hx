@@ -286,9 +286,9 @@ class Interp {
 	}
 
 	function resolve( id : String ) : Dynamic {
-		if (variables.exists(id)) {
+		if (variables.exists(id) && variables.get(id) != null) {
 			return variables.get(id);
-		} else if (modules.exists(id)) {
+		} else if (modules.exists(id) && modules.get(id) != null) {
 			return modules.get(id);
 		} else {
             error(EUnknownVariable(id));
