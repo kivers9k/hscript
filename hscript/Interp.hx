@@ -539,7 +539,7 @@ class Interp {
 			return expr(e);
 		case EImport(c, as):
 			var name = c.split('.').pop();
-			var module:Dynamic = Type.Class(c);
+			var module:Dynamic = Type.resolveClass(c);
 
 			if (Type.resolveEnum(c) != null)
                 module = Type.resolveEnum(c);
