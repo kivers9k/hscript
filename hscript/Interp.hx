@@ -285,13 +285,13 @@ class Interp {
 	}
 
 	function resolve( id : String ) : Dynamic {
-		if(variables.get(id) != null && variables.exists(id)) {
+		if (variables.get(id) != null && variables.exists(id)) {
 			return variables.get(id);
 		} else if (modules.get(id) != null && modules.exists(id)) {
             return modules.get(id);
 		} else {
 			error(EUnknownVariable(id));
-			return null;
+			return;
 		}
 	}
 
