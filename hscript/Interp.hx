@@ -291,8 +291,8 @@ class Interp {
             return modules.get(id);
 		} else {
 			error(EUnknownVariable(id));
-			return;
 		}
+		return variables.get(id);
 	}
 
 	public function expr( e : Expr ) : Dynamic {
