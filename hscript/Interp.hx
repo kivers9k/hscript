@@ -50,7 +50,7 @@ class Interp {
 	public function new() {
 		locals = new Map();
 		declared = new Array();
-		modules = new Map<String, Dynamic>();
+		modules = new Map<String,Dynamic>();
 		resetVariables();
 		initOps();
 	}
@@ -285,15 +285,15 @@ class Interp {
 		#end
 	}
 
-	function resolve( id : String ) : Dynamic {
-		if (variables.exists(id) && variables.get(id) != null) {
-			return variables.get(id);
-		} else if (modules.exists(id) && modules.get(id) != null) {
-			return modules.get(id);
-		} else {
-            error(EUnknownVariable(id));
-			return null;
+	function resolve(id:String):Dynamic {
+		var v = variables.get(id);
+		if (modules.get(id) != null && modules.exists(id)) {
+			v = modules.get(id);
 		}
+		if (!modules.exists(id) && !variables.exists(id)) {
+			error(EUnknownVariable(id));
+		}
+		return v;
 	}
 
 	public function expr( e : Expr ) : Dynamic {
@@ -539,7 +539,7 @@ class Interp {
 			return expr(e);
 		case EImport(c, as):
 			var name = c.split('.').pop();
-			var module:Dynamic = Type.resolveClass(c);
+			var module:Dynamic = Type.Class(c);
 
 			if (Type.resolveEnum(c) != null)
                 module = Type.resolveEnum(c);
