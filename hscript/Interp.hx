@@ -286,14 +286,14 @@ class Interp {
 	}
 
 	function resolve( id : String ) : Dynamic {
-        var v = variables.get(id);
-
-		if (modules.exists(id)) {
-			v = modules.get(id);
-		} else if (!modules.exists(id) || !variables.exists(id)) {
+		if (variables.exists(id)) {
+			return variables.get(id);
+		} else if (modules.exists(id)) {
+			return modules.get(id);
+		} else {
             error(EUnknownVariable(id));
+			return null;
 		}
-		return v;
 	}
 
 	public function expr( e : Expr ) : Dynamic {
