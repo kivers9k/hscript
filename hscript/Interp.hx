@@ -33,7 +33,9 @@ private enum Stop {
 class Interp {
 
 	public var variables : Map<String,Dynamic>;
+	public var modules : Map<String,Dynamic>;
 	public var locals : Map<String,{ r : Dynamic }>;
+	
 	var binops : Map<String, Expr -> Expr -> Dynamic >;
 
 	var depth : Int;
@@ -283,10 +285,14 @@ class Interp {
 	}
 
 	function resolve( id : String ) : Dynamic {
-		var v = variables.get(id);
-		if( v == null && !variables.exists(id) )
+		if(variables.get(id) != null && variables.exists(id)) {
+			return variables.get(id);
+		} else if (modules.get(id) != null && modules.exists(id)) {
+            return modules.get(id);
+		} else {
 			error(EUnknownVariable(id));
-		return v;
+			return null;
+		}
 	}
 
 	public function expr( e : Expr ) : Dynamic {
@@ -532,16 +538,16 @@ class Interp {
 			return expr(e);
 		case EImport(c, as):
 			var name = c.split('.').pop();
-			var resolves:Dynamic = Type.resolveClass(c);
+			var module:Dynamic = Type.resolveClass(c);
 
 			if (Type.resolveEnum(c) != null)
-                resolves = Type.resolveEnum(c);
+                module = Type.resolveEnum(c);
  		    
-			if (resolves != null) {
+			if (module != null) {
 				if (as != null) name = as;
-			    variables.set(name, resolves);
+			    modules.set(name, module);
 			} else {
-				error(ECustom('unknown identifier: ' + name));
+				error(ECustom('type not found: ' + name));
 		    }	
 	    }
 		return null;
