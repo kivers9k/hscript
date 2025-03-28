@@ -50,7 +50,7 @@ class Interp {
 	public function new() {
 		locals = new Map();
 		declared = new Array();
-		modules = new Map<String, Dyanmic>();
+		modules = new Map<String, Dynamic>();
 		resetVariables();
 		initOps();
 	}
