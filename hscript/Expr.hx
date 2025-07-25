@@ -67,7 +67,7 @@ enum Expr {
 	EDoWhile( cond : Expr, e : Expr);
 	EMeta( name : String, args : Array<Expr>, e : Expr );
 	ECheckType( e : Expr, t : CType );
-	EImport(c:String, as:String);
+	EImports(c:String, as:String);
 }
 
 typedef Argument = { name : String, ?t : CType, ?opt : Bool, ?value : Expr };

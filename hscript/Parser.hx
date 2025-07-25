@@ -777,7 +777,7 @@ class Parser {
 
 			var paths = path.join('.');
 			
-			mk(EImport(paths, asName), p1);
+			mk(EImports(paths, asName), p1);
 		default:
 			null;
 		}

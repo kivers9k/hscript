@@ -232,7 +232,7 @@ class Bytes {
 			doEncode(e);
 		case ECheckType(e,_):
 			doEncode(e);
-	    case EImport(c, as):
+	    case EImports(c, as):
 			doEncodeString(c);
 		}
 	}
